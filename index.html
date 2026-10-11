@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Smart Study Assistant</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-icon">S</div>
+        <div>
+          <h1>StudyBuddy AI</h1>
+          <p>Your personal study companion</p>
+        </div>
+      </div>
+
+      <nav class="main-nav">
+        <a href="#home">Home</a>
+        <a href="#study-modes">Study Tools</a>
+        <a href="#quiz-area" onclick="selectMode('Take a Quiz')">Quiz</a>
+        <a href="#flashcard-area" onclick="selectMode('Flashcards')"
+          >Flashcards</a
+        >
+      </nav>
+    </header>
+
+    <main>
+      <section class="welcome" id="home">
+        <div class="welcome-content">
+          <p class="welcome-label">YOUR PERSONAL AI STUDY SPACE</p>
+
+          <h2>Learn smarter.<br />Achieve more.</h2>
+
+          <p class="welcome-description">
+            Understand difficult concepts, practise questions, and revise at
+            your own pace.
+          </p>
+
+          <a href="#study-modes" class="welcome-button">
+            Start Learning &rarr;
+          </a>
+        </div>
+
+        <div class="welcome-visual" aria-hidden="true">
+          <div class="book-icon">📚</div>
+          <div class="welcome-note">
+            <span>YOUR NEXT STEP</span>
+            <strong>Keep learning!</strong>
+            <p>One concept at a time.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="study-options" id="study-modes">
+        <button
+          class="study-card explain-card"
+          onclick="selectMode('Explain a Topic')"
+        >
+          <span class="card-icon">📘</span>
+          <span class="card-title">Explain a Topic</span>
+          <span class="card-description">
+            Understand difficult concepts with simple explanations.
+          </span>
+          <span class="card-action">Start learning →</span>
+        </button>
+
+        <button
+          class="study-card quiz-card"
+          onclick="selectMode('Take a Quiz')"
+        >
+          <span class="card-icon">🎯</span>
+          <span class="card-title">Take a Quiz</span>
+          <span class="card-description">
+            Test your knowledge and check your understanding.
+          </span>
+          <span class="card-action">Test yourself →</span>
+        </button>
+
+        <button
+          class="study-card flashcard-card"
+          onclick="selectMode('Flashcards')"
+        >
+          <span class="card-icon">🗂️</span>
+          <span class="card-title">Flashcards</span>
+          <span class="card-description">
+            Revise important concepts with question-and-answer cards.
+          </span>
+          <span class="card-action">Start revising →</span>
+        </button>
+
+        <button
+          class="study-card question-card"
+          onclick="selectMode('Ask a Question')"
+        >
+          <span class="card-icon">💡</span>
+          <span class="card-title">Ask a Question</span>
+          <span class="card-description">
+            Ask about a concept you want to understand better.
+          </span>
+          <span class="card-action">Ask now →</span>
+        </button>
+      </section>
+
+      <section class="journey-section">
+        <div class="journey-heading">
+          <p class="journey-label">YOUR STUDY PLAN</p>
+          <h2>Your Learning Journey</h2>
+          <p>
+            Learn a concept, practise your skills, and revise what you know.
+          </p>
+        </div>
+
+        <div class="journey-grid">
+          <div class="journey-item">
+            <span class="journey-icon">📘</span>
+            <h3>Learn</h3>
+            <p>Understand OOP concepts with simple explanations.</p>
+          </div>
+
+          <div class="journey-item">
+            <span class="journey-icon">🎯</span>
+            <h3>Practise</h3>
+            <p>Test your knowledge with quick quizzes.</p>
+          </div>
+
+          <div class="journey-item">
+            <span class="journey-icon">🗂️</span>
+            <h3>Revise</h3>
+            <p>Remember important concepts using flashcards.</p>
+          </div>
+
+          <div class="journey-item">
+            <span class="journey-icon">💡</span>
+            <h3>Explore</h3>
+            <p>Ask questions about topics you want to understand.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="topic">
+        <h2>Learning Workspace</h2>
+
+        <div class="subject-selector">
+          <label for="subject-select">Choose your study subject</label>
+
+          <select id="subject-select">
+            <option value="cpp">C++ — Object-Oriented Programming</option>
+            <option value="java" disabled>Java — Coming soon</option>
+            <option value="python" disabled>Python — Coming soon</option>
+            <option value="web" disabled>
+              HTML, CSS & JavaScript — Coming soon
+            </option>
+          </select>
+
+          <!-- Topic Search -->
+          <div class="topic-search">
+            <label for="topic-search-input">Search C++ OOP topics</label>
+            <input
+              type="text"
+              id="topic-search-input"
+              placeholder="Try inheritance, polymorphism..."
+              autocomplete="off"
+            />
+            <div id="topic-search-results"></div>
+          </div>
+
+          <p id="subject-description">
+            Learn C++ OOP concepts, practise quiz questions, and revise with
+            flashcards.
+          </p>
+        </div>
+
+        <p id="workspace-description">
+          Choose a study tool above to begin learning.
+        </p>
+
+        <div id="learning-area" hidden>
+          <label for="topic-input">Enter an OOP topic or question:</label>
+
+          <input
+            type="text"
+            id="topic-input"
+            placeholder="Example: What is inheritance?"
+          />
+
+          <button id="submit-question" onclick="explainTopic()">Submit</button>
+
+          <div id="answer"></div>
+        </div>
+      </section>
+
+      <section class="topic" id="quiz-area" hidden>
+        <h2>OOP Practice Quiz</h2>
+
+        <p id="quiz-progress">Question 1 of 5</p>
+
+        <h3 id="quiz-question">Your question will appear here.</h3>
+
+        <div id="quiz-options"></div>
+
+        <p id="quiz-feedback"></p>
+
+        <button id="next-question" onclick="nextQuestion()" hidden>
+          Next Question
+        </button>
+
+        <p id="quiz-score"></p>
+      </section>
+
+      <section class="topic" id="flashcard-area" hidden>
+        <h2>OOP Flashcards</h2>
+
+        <p id="flashcard-progress">Card 1 of 5</p>
+
+        <div class="flashcard">
+          <h3 id="flashcard-question">Your question will appear here.</h3>
+          <p id="flashcard-answer" hidden></p>
+        </div>
+
+        <button id="reveal-answer" onclick="revealAnswer()">
+          Reveal Answer
+        </button>
+
+        <button id="next-card" onclick="nextCard()">Next Card</button>
+      </section>
+    </main>
+
+    <section class="project-info">
+      <h2>About StudyBuddy AI</h2>
+      <p>
+        StudyBuddy AI is a beginner-friendly study assistant designed to help
+        learners understand C++ Object-Oriented Programming.
+      </p>
+
+      <h3>Features</h3>
+      <ul>
+        <li>Topic explanations and examples</li>
+        <li>Topic search and question matching</li>
+        <li>C++ code examples with Copy Code</li>
+        <li>Interactive quizzes and flashcards</li>
+      </ul>
+
+      <h3>Technologies Used</h3>
+      <p>HTML, CSS, and JavaScript</p>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
